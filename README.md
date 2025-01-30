@@ -6,7 +6,9 @@ TraceScape is a network tracking tool that visualizes network activity by integr
 Packet Capture & Analysis – Uses Wireshark to capture and analyze network traffic.
 
 IP Geolocation Mapping – Maps IP addresses to their geographic locations using Google Maps.
+
 Threat Detection – Identifies potential security threats based on network activity.
+
 Automated Reporting – Generates logs of network traces for further analysis.
 
 🔧 Technologies Used
