@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <!-- Define the Style -->
+    <Style id="transBluePoly">
+      <LineStyle>
+        <width>1.5</width>
+        <color>501400E6</color> <!-- Semi-transparent blue -->
+      </LineStyle>
+    </Style>
+
+    <!-- Create a Polygon with Coordinates -->
+    <Placemark>
+      <name>Example Polygon</name>
+      <styleUrl>#transBluePoly</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              -122.0822035425683,37.42228990140251,0
+              -122.08565407562256,37.42228990140251,0
+              -122.08565407562256,37.42164531763522,0
+              -122.0822035425683,37.42164531763522,0
+              -122.0822035425683,37.42228990140251,0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>
