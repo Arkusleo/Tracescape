@@ -3,19 +3,19 @@ TraceScape is a network tracking tool that visualizes network activity by integr
 
 🚀 Features
 
-Packet Capture & Analysis – Uses Wireshark to capture and analyze network traffic.
+- Packet Capture & Analysis – Uses Wireshark to capture and analyze network traffic.
 
-IP Geolocation Mapping – Maps IP addresses to their geographic locations using Google Maps.
+- IP Geolocation Mapping – Maps IP addresses to their geographic locations using Google Maps.
 
-Threat Detection – Identifies potential security threats based on network activity.
+- Threat Detection – Identifies potential security threats based on network activity.
 
-Automated Reporting – Generates logs of network traces for further analysis.
+- Automated Reporting – Generates logs of network traces for further analysis.
 
 🔧 Technologies Used
 
-Python (core implementation)
+- Python (core implementation)
 
-Wireshark/TShark (for packet capture)
+- Wireshark/TShark (for packet capture)
 
-Google Maps API (for visualization)
+- Google Maps API (for visualization)
 
