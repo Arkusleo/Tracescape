@@ -12,11 +12,3 @@ Python (core implementation)
 Wireshark/TShark (for packet capture)
 Google Maps API (for visualization)
 
- Installation & Usage
-Clone the repository:
-git clone https://github.com/yourusername/TraceScape.git
-cd TraceScape
-
-
-
-
