@@ -48,10 +48,8 @@ def retKML(dstip, service):
         if not dst.location:
             print(f"No geolocation data for {dstip}")
             return ''
-        
-        # Use a fixed location for system IP (to avoid private IP errors)
-        srclatitude, srclongitude = 9.9312, 76.2673  # Example: Kochi, Kerala (Modify if needed)
-
+            
+        srclatitude, srclongitude = 9.9312, 76.2673  
         dstlongitude, dstlatitude = dst.location.longitude, dst.location.latitude
 
         # Create the KML placemark
@@ -123,7 +121,6 @@ def plotIPs(pcap, current_ip):
     return kmlPts
 
 def main():
-    # Retrieve your current local IP to be used as the source IP.
     current_ip = get_local_ip()
     print("Current Local IP (used as source):", current_ip)
     
