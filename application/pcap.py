@@ -19,14 +19,12 @@ def live_capture_with_pyshark(interface: str):
         print(packet)
 
 if __name__ == "__main__":
-    scapy_interface = "Wi-Fi"  # Change to your network interface name
-    pyshark_interface = "eth0"  # Change this to your live capture interface
+    scapy_interface = "Wi-Fi" 
+    pyshark_interface = "eth0" 
     output_file = "cap.pcap"
     packet_count = 100
 
-    # Run Scapy capture in a separate thread
     scapy_thread = threading.Thread(target=capture_with_scapy, args=(scapy_interface, output_file, packet_count))
     scapy_thread.start()
 
-    # Run PyShark live capture
     live_capture_with_pyshark(pyshark_interface)
