@@ -1,9 +1,9 @@
 # Tracescape
-TraceScape is a network tracking tool that visualizes network activity by integrating Wireshark packet analysis with Google Maps. It helps users analyze IP geolocations, track suspicious connections, and gain insights into real-time network behavior.
+TraceScape is a network tracking tool that visualizes network activity by integrating packet capture analysis with Google Maps. It helps users analyze IP geolocations, track suspicious connections, and gain insights into real-time network behavior.
 
 🚀 Features
 
-- Packet Capture & Analysis – Uses Wireshark to capture and analyze network traffic.
+- Packet Capture & Analysis – Uses pcap.py to capture and analyze network traffic.
 
 - IP Geolocation Mapping – Maps IP addresses to their geographic locations using Google Maps.
 
