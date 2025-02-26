@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracescape</title>
+    <style>
+        body {
+            background: url('{{ url_for("static", filename="Cybersecurity.jpeg") }}') no-repeat center center fixed;
+            background-size: cover;
+            color: red;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tracescape - Network Packet Capture</h1>
+    <button onclick="startCapture()">Start Packet Capture</button>
+    <p id="status"></p>
+
+    <script>
+        function startCapture() {
+            document.getElementById("status").innerText = "Capturing packets...";
+            fetch("/capture")
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("status").innerText = data.message;
+                    if (data.kml) {
+                        let link = document.createElement("a");
+                        link.href = data.kml;
+                        link.innerText = "Download KML File";
+                        link.style.display = "block";
+                        link.style.marginTop = "20px";
+                        link.style.color = "yellow";
+                        link.style.fontSize = "18px";
+                        document.body.appendChild(link);
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
