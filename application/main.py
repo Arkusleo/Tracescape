@@ -142,7 +142,8 @@ def main():
 <Document>
   <Style id="transRedPoly">
     <LineStyle>
-      <width>3</width>
+     <tessellate>1</tessellate>
+      <width>2</width>
       <color>501400E6</color>
     </LineStyle>
   </Style>
