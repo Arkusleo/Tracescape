@@ -1,6 +1,8 @@
+
 import dpkt
 import socket
 import geoip2.database
+from geopy.distance import geodesic
 
 reader = geoip2.database.Reader(r"e:\\trace scape\\GeoLite2-City.mmdb")
 
@@ -48,10 +50,14 @@ def retKML(dstip, service):
         if not dst.location:
             print(f"No geolocation data for {dstip}")
             return ''
-            
-        srclatitude, srclongitude = 9.9312, 76.2673  
+        
+        # Use a fixed location for system IP (to avoid private IP errors)
+        srclatitude, srclongitude = 10.0095238, 76.4530024  
+
         dstlongitude, dstlatitude = dst.location.longitude, dst.location.latitude
 
+        # ✅ Calculate the distance between source and destination
+        distance_km = geodesic((srclatitude, srclongitude), (dstlatitude, dstlongitude)).km
         # Create the KML placemark
         kml = (
             '<Placemark>\n'
@@ -60,6 +66,7 @@ def retKML(dstip, service):
             f'    Source IP: {srcip}\n'
             f'    Destination IP: {dstip}\n'
             f'    Likely Service: {service}\n'
+            f'    Distance: {distance_km:.2f} km\n' 
             '  ]]></description>\n'
             '  <styleUrl>#transRedPoly</styleUrl>\n'
             '  <LineString>\n'
@@ -121,6 +128,7 @@ def plotIPs(pcap, current_ip):
     return kmlPts
 
 def main():
+    # Retrieve your current local IP to be used as the source IP.
     current_ip = get_local_ip()
     print("Current Local IP (used as source):", current_ip)
     
