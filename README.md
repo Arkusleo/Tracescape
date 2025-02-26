@@ -15,7 +15,7 @@ TraceScape is a network tracking tool that visualizes network activity by integr
 
 - Python (core implementation)
 
-- Wireshark/TShark (for packet capture)
-
+- pyShark (for packet capture)
+- 
 - Google Maps API (for visualization)
 
