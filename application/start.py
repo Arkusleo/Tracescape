@@ -39,9 +39,29 @@ html_content = """<!DOCTYPE html>
             font-size: 20px;
             cursor: pointer;
             border-radius: 5px;
+            margin-top: 20px;
         }
         button:hover {
             background-color: darkred;
+        }
+        #download-kml-btn {
+            background: linear-gradient(135deg, #00feba, #5b548a);
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.4);
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: none; /* Initially hidden */
+        }
+        #download-kml-btn:hover {
+            background: linear-gradient(135deg, #5b548a, #00feba);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.6);
         }
     </style>
 </head>
@@ -49,6 +69,8 @@ html_content = """<!DOCTYPE html>
     <h1>Tracescape - Network Packet Capture</h1>
     <button onclick="startCapture()">Start Packet Capture</button>
     <p id="status"></p>
+
+    <button id="download-kml-btn" onclick="downloadKML()">Download KML File</button>
 
     <script>
         function startCapture() {
@@ -58,16 +80,21 @@ html_content = """<!DOCTYPE html>
                 .then(data => {
                     document.getElementById("status").innerText = data.message;
                     if (data.kml) {
-                        let link = document.createElement("a");
-                        link.href = data.kml;
-                        link.innerText = "Download KML File";
-                        link.style.display = "block";
-                        link.style.marginTop = "20px";
-                        link.style.color = "yellow";
-                        link.style.fontSize = "18px";
-                        document.body.appendChild(link);
+                        let downloadBtn = document.getElementById("download-kml-btn");
+                        downloadBtn.style.display = "inline-block";
+                        downloadBtn.setAttribute("data-url", data.kml);
                     }
                 });
+        }
+
+        function downloadKML() {
+            let downloadBtn = document.getElementById("download-kml-btn");
+            let kmlUrl = downloadBtn.getAttribute("data-url");
+            if (kmlUrl) {
+                window.location.href = kmlUrl;
+            } else {
+                alert("KML file not available.");
+            }
         }
     </script>
 </body>
