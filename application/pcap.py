@@ -32,7 +32,7 @@ if __name__ == "__main__":
     scapy_interface = "Wi-Fi"  # Change to your network interface name
     pyshark_interface = "eth0"  # Change this to your live capture interface
     output_file = "cap.pcap"
-    packet_count = 100
+    packet_count = 300
 
     # Run Scapy capture in a separate thread
     scapy_thread = threading.Thread(target=capture_with_scapy, args=(scapy_interface, output_file, packet_count))
