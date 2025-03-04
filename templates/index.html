@@ -4,33 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tracescape</title>
-    <style>
-        body {
-            background: url('{{ url_for("static", filename="Cybersecurity.jpeg") }}') no-repeat center center fixed;
+    <style> 
+        @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;600;700&display=swap');
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background: url('{{ url_for("static", filename="cybersecurity.jpeg") }}') no-repeat center center fixed;
             background-size: cover;
-            color: red;
-            font-family: Arial, sans-serif;
+            color: rgb(255, 255, 255);
+            font-family: 'SF Pro Display', Arial, sans-serif;
             text-align: center;
-            margin-top: 50px;
         }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 70px;
+            font-weight: bold;
+            margin: 0;
+            color: rgb(255, 255, 255);
+        }
+
+        .hero p {
+            font-size: 24px;
+            opacity: 0.8;
+            max-width: 600px;
+        }
+
+        .capture-box {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background: url('{{ url_for("static", filename="networkmap.jpeg") }}') no-repeat center center;
+            background-size: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            color: rgb(255, 255, 255);
+        }
+
+        .capture-box h2 {
+            color: rgb(255, 255, 255);
+            font-size: 32px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+
         button {
-            background-color: red;
-            color: white;
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
             border: none;
-            padding: 10px 20px;
+            padding: 15px 40px;
             font-size: 20px;
+            font-weight: bold;
+            color: white;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 20px;
         }
+
         button:hover {
-            background-color: darkred;
+            background: linear-gradient(135deg, #ff4b2b, #ff416c);
+            box-shadow: 0 10px 30px rgba(255, 69, 0, 0.7);
+        }
+
+        #download-kml-btn {
+            display: none;
+        }
+
+        .section {
+            padding: 100px 20px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>Tracescape - Network Packet Capture</h1>
-    <button onclick="startCapture()">Start Packet Capture</button>
-    <p id="status"></p>
+
+    <div class="hero">
+        <h1>Tracescape</h1>
+        <p>Analyze network packets with precision.</p>
+        <a href="#capture"><button>Get Started</button></a>
+    </div>
+
+    <div id="capture" class="section capture-box">
+        <h2>Packet Capture</h2>
+        <p>Monitor network traffic in real time with advanced packet capturing and anomaly detection.</p>
+        <button onclick="startCapture()">Start Packet Capture</button>
+        <button onclick="runAnomalyDetection()">Run Anomaly Detection</button>
+        <p id="status"></p>
+        <img id="anomaly-img" style="display: none; margin-top: 20px; max-width: 80%; border: 2px solid black;" />
+        <button id="download-kml-btn" onclick="downloadKML()">Download KML File</button>
+    </div>
 
     <script>
         function startCapture() {
@@ -40,17 +121,39 @@
                 .then(data => {
                     document.getElementById("status").innerText = data.message;
                     if (data.kml) {
-                        let link = document.createElement("a");
-                        link.href = data.kml;
-                        link.innerText = "Download KML File";
-                        link.style.display = "block";
-                        link.style.marginTop = "20px";
-                        link.style.color = "yellow";
-                        link.style.fontSize = "18px";
-                        document.body.appendChild(link);
+                        let downloadBtn = document.getElementById("download-kml-btn");
+                        downloadBtn.style.display = "inline-block";
+                        downloadBtn.setAttribute("data-url", data.kml);
                     }
-                });
+                })
+                .catch(error => console.error("Error:", error));
+        }
+
+        function runAnomalyDetection() {
+            document.getElementById("status").innerText = "Running anomaly detection...";
+            fetch('/run-anomaly')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("status").innerText = data.message;
+                    if (data.image) {
+                        let anomalyImg = document.getElementById("anomaly-img");
+                        anomalyImg.src = data.image;
+                        anomalyImg.style.display = "block";
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function downloadKML() {
+            let downloadBtn = document.getElementById("download-kml-btn");
+            let kmlUrl = downloadBtn.getAttribute("data-url");
+            if (kmlUrl) {
+                window.location.href = kmlUrl;
+            } else {
+                alert("KML file not available.");
+            }
         }
     </script>
+
 </body>
 </html>
