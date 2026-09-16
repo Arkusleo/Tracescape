@@ -20,3 +20,4 @@ TraceScape is a network tracking tool that visualizes network activity by integr
 - Google Maps API (for visualization)
   
 
+<img width="660" height="330" alt="image" src="https://github.com/user-attachments/assets/7db13979-c0e4-4e67-8fe2-9949afe0e5fd" />
